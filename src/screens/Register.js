@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Alert, ActivityIndicator, Image } from 'react-native';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import LinearGradient from 'react-native-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 
 const Register = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -10,7 +12,6 @@ const Register = ({ navigation }) => {
 
     const auth = getAuth();
 
-    
     const handleRegister = async () => {
         if (password !== confirmPassword) {
             Alert.alert('Error', 'Las contraseñas no coinciden');
@@ -32,46 +33,55 @@ const Register = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Registro de usuario</Text>
+        <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.container}>
+            <View style={styles.logoContainer}>
+                <Image source={{ uri: 'https://example.com/logo.png' }} style={styles.logo} />
+                <Text style={styles.title}>Registro de usuario</Text>
+            </View>
             <View style={styles.inputContainer}>
-                <Text style={styles.label}>Email:</Text>
+                <Ionicons name="mail-outline" size={20} color="#555" style={styles.icon} />
                 <TextInput
                     style={styles.input}
                     onChangeText={setEmail}
                     value={email}
+                    placeholder="Email"
                     keyboardType='email-address'
                     autoCapitalize='none'
+                    placeholderTextColor="#aaa"
                 />
             </View>
             <View style={styles.inputContainer}>
-                <Text style={styles.label}>Contraseña:</Text>
+                <Ionicons name="lock-closed-outline" size={20} color="#555" style={styles.icon} />
                 <TextInput
                     style={styles.input}
                     onChangeText={setPassword}
                     value={password}
+                    placeholder="Contraseña"
                     secureTextEntry={true}
                     autoCapitalize='none'
+                    placeholderTextColor="#aaa"
                 />
             </View>
             <View style={styles.inputContainer}>
-                <Text style={styles.label}>Confirmar Contraseña:</Text>
+                <Ionicons name="lock-closed-outline" size={20} color="#555" style={styles.icon} />
                 <TextInput
                     style={styles.input}
                     onChangeText={setConfirmPassword}
                     value={confirmPassword}
+                    placeholder="Confirmar Contraseña"
                     secureTextEntry={true}
                     autoCapitalize='none'
+                    placeholderTextColor="#aaa"
                 />
             </View>
             {loading ? (
-                <ActivityIndicator size="large" color="#0288d1" />
+                <ActivityIndicator size="large" color="#fff" />
             ) : (
                 <TouchableOpacity style={styles.button} onPress={handleRegister}>
                     <Text style={styles.buttonText}>Registrar</Text>
                 </TouchableOpacity>
             )}
-        </View>
+        </LinearGradient>
     );
 };
 
@@ -80,53 +90,62 @@ export default Register;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,
     },
+    logoContainer: {
+        alignItems: 'center',
+        marginBottom: 30,
+    },
+    logo: {
+        width: 100,
+        height: 100,
+        marginBottom: 10,
+    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 20,
-        textAlign: 'center',
-    },
-    input: {
-        height: 40,
-        borderColor: '#ccc',
-        borderWidth: 1,
-        borderRadius: 4,
-        paddingLeft: 8,
-        backgroundColor: '#fff',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
-        elevation: 2,
-        width: '100%'
-    },
-    label: {
-        fontSize: 16,
-        marginBottom: 8,
-        color: '#333',
+        color: '#fff',
     },
     inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
         width: '100%',
-        padding: 16,
-        backgroundColor: '#f8f9fa',
-        marginBottom: 16,
+        backgroundColor: '#fff',
+        borderRadius: 25,
+        marginBottom: 20,
+        paddingHorizontal: 15,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        elevation: 5,
+    },
+    icon: {
+        marginRight: 10,
+    },
+    input: {
+        flex: 1,
+        height: 40,
+        color: '#333',
     },
     button: {
-        backgroundColor: '#0288d1',
-        padding: 10,
-        borderRadius: 5,
+        backgroundColor: '#3b5998',
+        padding: 15,
+        borderRadius: 25,
         marginTop: 20,
         width: '100%',
         alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        elevation: 5,
     },
     buttonText: {
         color: 'white',
         fontWeight: 'bold',
-        textAlign: 'center',
+        fontSize: 16,
     },
 });
