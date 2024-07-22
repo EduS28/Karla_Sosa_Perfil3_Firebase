@@ -52,13 +52,13 @@ const Login = ({ navigation }) => {
                 />
             </View>
             {loading ? (
-                <ActivityIndicator size="large" color="#0000ff" />
+                <ActivityIndicator size="large" color="#ff69b4" />
             ) : (
                 <>
                     <TouchableOpacity style={styles.button} onPress={handleLogin}>
                         <Text style={styles.buttonText}>Iniciar sesión</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={navigateToRegister}>
+                    <TouchableOpacity style={[styles.button, styles.registerButton]} onPress={navigateToRegister}>
                         <Text style={styles.buttonText}>Registrarse</Text>
                     </TouchableOpacity>
                 </>
@@ -78,34 +78,39 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: 'bold',
-        marginBottom: 20,
+        color: '#ff69b4',
+        marginBottom: 30,
         textAlign: 'center',
     },
     input: {
         height: 40,
         borderColor: '#ccc',
         borderWidth: 1,
-        borderRadius: 4,
-        paddingLeft: 8,
+        borderRadius: 20,
+        paddingLeft: 16,
         width: '100%',
+        backgroundColor: '#ffe6f0',
     },
     label: {
         fontSize: 16,
         marginBottom: 8,
-        color: '#333',
+        color: '#ff69b4',
     },
     inputContainer: {
         width: '100%',
         padding: 16,
-        backgroundColor: '#f8f9fa',
+        backgroundColor: '#fff0f5',
         marginBottom: 16,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#ff69b4',
     },
     button: {
-        backgroundColor: '#0288d1',
-        padding: 10,
-        borderRadius: 5,
+        backgroundColor: '#ff69b4',
+        padding: 15,
+        borderRadius: 20,
         marginTop: 20,
         width: '100%',
         alignItems: 'center',
@@ -113,5 +118,9 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontWeight: 'bold',
+    },
+    registerButton: {
+        backgroundColor: '#ffb6c1',
+        marginTop: 10,
     },
 });
